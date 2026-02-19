@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget Decision Tool</title>
+    <link rel="stylesheet" href="m2.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Budget Decision Tool</h1>
+            <p class="subtitle">Can you afford it? Let's find out!</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Check Your Purchase</h2>
+                
+                <div class="info-box">
+                    <p>Click the button below to answer a few questions and see if you can afford your desired item!</p>
+                </div>
+
+                <button id="checkBudgetBtn" class="btn">🔍 Check My Budget</button>
+            </div>
+
+            <div class="result-card" id="resultCard" style="display: none;">
+                <h3>Decision Result:</h3>
+                <p id="resultMessage"></p>
+                <div class="score-badge" id="scoreBadge"></div>
+            </div>
+
+            <div class="tips">
+                <h3>💡 Budget Tips:</h3>
+                <ul>
+                    <li>Always save at least 20% of your income</li>
+                    <li>Compare prices before buying</li>
+                    <li>Ask yourself: "Do I really need this?"</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>Created for GDG On Campus AASTU | Mini Project 1</p>
+        </footer>
+    </div>
+
+    <script src="m2.js"></script>
+</body>
+</html>

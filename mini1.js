@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // DOM Elements
+    
     const screens = {
         start: document.getElementById('startScreen'),
         quiz: document.getElementById('quizScreen'),
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewList = document.getElementById('reviewList');
     const shareBtn = document.getElementById('shareResults');
 
-    // 7 Interesting Questions
     const questions = [
         {
             text: "🧠 What do you do when you see a math problem?",
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fact: "Humans have about 10,000 taste buds!"
         },
         {
-            text: "🌈 How do you feel when you see a beautiful sunset?",
+            text: " How do you feel when you see a beautiful sunset?",
             options: [
                 { text: "Peaceful and happy", emoji: "😌", value: 1 },
                 { text: "Take a photo", emoji: "📸", value: 1 },
@@ -88,16 +87,16 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             text: "🧪 Quick logic: What comes next? 2, 4, 8, ?",
             options: [
-                { text: "16 (doubling)", emoji: "✅", value: 1 },
-                { text: "10", emoji: "❌", value: 0 },
-                { text: "12", emoji: "❌", value: 0 },
-                { text: "14", emoji: "❌", value: 0 }
+                { text: "16 ", value: 1 },
+                { text: "10", value: 0 },
+                { text: "12" , value: 0 },
+                { text: "14", value: 0 }
             ],
             fact: "Pattern recognition is a key human intelligence trait!"
         }
     ];
 
-    // Quiz state
+    
     let currentIndex = 0;
     let score = 0;
     let answers = [];
@@ -105,26 +104,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     totalQuestions.textContent = questions.length;
 
-    // Start quiz
     startBtn.addEventListener('click', function() {
         screens.start.classList.remove('active');
         screens.quiz.classList.add('active');
         loadQuestion(0);
     });
 
-    // Load question
     function loadQuestion(index) {
         const q = questions[index];
         questionText.textContent = q.text;
         questionCounter.textContent = `${index + 1}/${questions.length}`;
         
-        // Update progress circle
         const progress = ((index) / questions.length) * 100;
         const circumference = 163.36;
         const offset = circumference - (progress / 100) * circumference;
         progressCircle.style.strokeDashoffset = offset;
         
-        // Load options
         optionsGrid.innerHTML = '';
         selectedOption = null;
         nextBtn.disabled = true;
@@ -139,13 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             card.addEventListener('click', () => selectOption(opt, card));
             
-            // Add animation delay
             card.style.animation = `fadeIn 0.3s ease ${i * 0.1}s both`;
             optionsGrid.appendChild(card);
         });
     }
 
-    // Select option
+   
     function selectOption(option, element) {
         document.querySelectorAll('.option-card').forEach(card => {
             card.classList.remove('selected');
@@ -155,22 +149,16 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedOption = option;
         nextBtn.disabled = false;
         
-        // Small vibration effect
         element.style.transform = 'scale(0.98)';
         setTimeout(() => {
             element.style.transform = '';
         }, 200);
     }
-
-    // Next button
     nextBtn.addEventListener('click', function() {
         if (!selectedOption) return;
-        
-        // Add to score
         score += selectedOption.value;
         liveScore.textContent = score;
         
-        // Store answer
         answers.push({
             question: questions[currentIndex].text,
             answer: selectedOption.text,
@@ -178,27 +166,18 @@ document.addEventListener('DOMContentLoaded', function() {
             fact: questions[currentIndex].fact,
             emoji: selectedOption.emoji
         });
-        
-        // Move to next question or show results
         if (currentIndex < questions.length - 1) {
             currentIndex++;
             loadQuestion(currentIndex);
         } else {
-            // Complete progress circle
             progressCircle.style.strokeDashoffset = 0;
             showResults();
         }
     });
-
-    // Show results
     function showResults() {
         screens.quiz.classList.remove('active');
         screens.result.classList.add('active');
-        
-        // Calculate percentage
         const percentage = Math.round((score / questions.length) * 100);
-        
-        // Determine result type
         let result;
         if (percentage >= 70) {
             result = {
@@ -222,20 +201,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 color: 'linear-gradient(135deg, var(--gray), var(--dark))'
             };
         }
-        
-        // Update result display
+      
         resultBadge.textContent = result.badge;
         resultBadge.style.background = result.color;
         resultTitle.textContent = result.title;
         resultDescription.textContent = result.desc;
         finalScorePercent.textContent = percentage + '%';
         correctCount.textContent = score;
-        
-        // Show answer review
         showReview();
     }
 
-    // Show answer review
     function showReview() {
         reviewList.innerHTML = '';
         
@@ -256,8 +231,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             reviewList.appendChild(item);
         });
-
-        // Add fun fact
         const factDiv = document.createElement('div');
         factDiv.style.background = 'var(--light)';
         factDiv.style.padding = '15px';
@@ -274,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
         reviewList.appendChild(factDiv);
     }
 
-    // Share results
     if (shareBtn) {
         shareBtn.addEventListener('click', function() {
             const percent = finalScorePercent.textContent;
@@ -296,14 +268,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Keyboard navigation (bonus feature)
     document.addEventListener('keydown', function(e) {
         if (screens.quiz.classList.contains('active')) {
             if (e.key === 'Enter' && !nextBtn.disabled) {
                 nextBtn.click();
             }
             
-            // Number keys for options (1-4)
             if (e.key >= '1' && e.key <= '4') {
                 const index = parseInt(e.key) - 1;
                 const options = document.querySelectorAll('.option-card');
@@ -313,4 +283,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
 });

@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             text: "🧪 Quick logic: What comes next? 2, 4, 8, ?",
             options: [
-                { text: "16 ", value: 1 },
-                { text: "10", value: 0 },
-                { text: "12" , value: 0 },
-                { text: "14", value: 0 }
+                { text: "16", emoji: "", value: 1 },
+                { text: "10", emoji: "", value: 0 },
+                { text: "12", emoji: "", value: 0 },
+                { text: "14", emoji: "", value: 0 }
             ],
             fact: "Pattern recognition is a key human intelligence trait!"
         }
@@ -285,3 +285,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
